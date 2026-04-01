@@ -1,0 +1,354 @@
+/* Основные стили */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --dark-color: #343a40;
+    --light-color: #f8f9fa;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Основной контент занимает все доступное пространство */
+main {
+    flex: 1 0 auto;
+    width: 100%;
+}
+
+/* Footer всегда внизу */
+footer {
+    flex-shrink: 0;
+    width: 100%;
+    background: linear-gradient(135deg, var(--dark-color), #23272b);
+    margin-top: auto;
+}
+
+/* Остальные стили (как были ранее) */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-card {
+    animation: fadeIn 0.5s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.animate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+}
+
+.animate-form {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Стили для слайдера */
+.carousel-item {
+    height: 400px;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-caption {
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    text-align: left;
+}
+
+/* Стили для рейтинга */
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    cursor: pointer;
+    font-size: 30px;
+    color: #ddd;
+    margin-right: 5px;
+    transition: color 0.2s;
+}
+
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label {
+    color: #ffd700;
+}
+
+/* Микроанимации */
+.btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255,255,255,0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+/* Стили для карточек */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.card:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* Стили для форм */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+/* Уведомления */
+.alert {
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Индикатор загрузки */
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--light-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 390px) {
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .carousel-item {
+        height: 250px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .table {
+        font-size: 0.9rem;
+    }
+}
+
+/* Кастомная прокрутка */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-color);
+}
+
+/* Стили для таблиц */
+.table-hover tbody tr:hover {
+    background-color: rgba(0,123,255,0.05);
+    transition: background-color 0.3s ease;
+}
+
+/* Стили для бейджей */
+.badge {
+    padding: 5px 10px;
+    font-weight: 500;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    transform: scale(1.05);
+}
+
+/* Стили для кнопок действий */
+.btn-group .btn {
+    margin: 0 2px;
+    border-radius: 20px !important;
+}
+
+/* Прогресс-бар */
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+/* Анимация появления элементов при скролле */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Стили для админ-панели */
+.stat-card {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Стили для навигации */
+.breadcrumb {
+    background: transparent;
+    padding: 0.5rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+/* Дополнительные стили для footer */
+footer a {
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: white !important;
+    text-decoration: underline !important;
+}
+
+/* Контейнер для контента на страницах с формами */
+.min-height-container {
+    min-height: calc(100vh - 300px);
+    display: flex;
+    align-items: center;
+}
+
+/* Коррекция отступов для разных страниц */
+.page-wrapper {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    flex: 1;
+}
